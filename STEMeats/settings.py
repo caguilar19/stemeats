@@ -31,7 +31,7 @@ CSRF_COOKIE_SECURE = True
 
 SESSION_COOKIE_SECURE = True
 
-ALLOWED_HOSTS = ['cryptic-springs-74775.herokuapp.com/', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['.herokuapp.com/', '127.0.0.1', 'localhost']
 
 
 # Application definition
