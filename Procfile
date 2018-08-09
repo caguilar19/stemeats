@@ -1,1 +1,1 @@
-web: gunicorn STEMeats.wsgi --log-file-
+web: gunicorn STEMeats.wsgi --log-file -
