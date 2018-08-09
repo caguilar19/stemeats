@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 
+import dj_database_url
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -29,7 +31,7 @@ CSRF_COOKIE_SECURE = True
 
 SESSION_COOKIE_SECURE = True
 
-ALLOWED_HOSTS = ['.herokuapp.com']
+ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -122,4 +125,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATIC_URL = '/static/'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
