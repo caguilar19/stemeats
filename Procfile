@@ -1,1 +1,1 @@
-web: gunicorn app:app --log-file=-
+web: gunicorn STEMeats.wsgi --log-file-
