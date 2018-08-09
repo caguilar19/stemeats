@@ -1,0 +1,176 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{% block title %}{% endblock %}</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+		<script id="comment_template" type="text/x-handlebars-template">
+			{% verbatim %}
+				<tr>
+					<td>
+						<div class="col s12"><b>{{user}}</b></div>
+						<div class="col s12">{{comment}}</div>
+						<div class="col s12 center-align">{{time}}</div>
+					</td>
+				</tr>
+			{% endverbatim %}
+		</script>
+		<script src="https://d3js.org/d3.v5.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+				tex2jax: {
+				    inlineMath: [['$','$'], ['\\(','\\)']],
+				    processEscapes: true,
+			  	},
+			  	messageStyle: "none"
+			});
+			MathJax.Hub.Register.StartupHook("End", () => {
+				$(".load").hide()
+				$(".content").show()
+			});
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+		<script type="text/javascript" src="{% static 'foodblog/script.js' %}"></script>
+		<script type="text/javascript" src="{% static 'foodblog/nouislider.js' %}"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+		<link rel="stylesheet" href="{% static 'foodblog/style.css' %}">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+		<link rel="stylesheet" href="{% static 'foodblog/nouislider.css' %}">
+	</head>
+	<body>
+		<div class="preloader-wrapper big active load" hidden="false">
+		    <div class="spinner-layer spinner-blue-only">
+		    	<div class="circle-clipper left">
+		    		<div class="circle"></div>
+		    	</div>
+		    	<div class="gap-patch">
+		    		<div class="circle"></div>
+		    	</div>
+		    	<div class="circle-clipper right">
+		    		<div class="circle"></div>
+		   		</div>
+	    	</div>
+		</div>
+	    <div class="content" hidden="true">
+	    	<div class="container">
+	    		<div class="row">
+			    	<div class="logo1 col s12">
+			    		<a href="{% url 'index' %}">
+			    			\begin{equation*}
+			    				\huge\text{STEM}^{\text{eats}}
+			    			\end{equation*}
+			    		</a>
+			    	</div>
+
+			    	<div class="logo2 col s12">
+			    		<a href="{% url 'index' %}">
+				    		\begin{equation*}
+				    			\huge\sum\frac{1}{\nu}\left(mc^{2}\right)\frac{F}{a}^{\left(\sum\limits_{n = 0}^{\infty}\frac{1}{n!}\right)\,\ddot{x}\,\frac{v}{a}\,r\theta}
+				    		\end{equation*}
+			    		</a>
+			    	</div>
+
+			    	{% if request.user.is_authenticated %}
+			    		<div class="col s4">
+			    			Logged in as: {{ request.user }}
+			    			<a class="waves-effect waves-white btn" href="{% url 'logout' %}">
+				    			Log Out
+				    		</a>
+			    		</div>
+			    	{% else %}
+				    	<div class="col s4">
+				    		<a class="waves-effect waves-white btn modal-trigger" href="#login">
+				    			Log In
+				    		</a>
+				    		<a class="waves-effect waves-white btn modal-trigger" href="#signup">
+				    			Sign Up
+				    		</a>
+				    		<br>
+				    		<div class="red-text">
+				    			{{ message }}
+				    		</div>
+				    	</div>
+				    {% endif %}
+
+			    	<div class="col s4 offset-s4">
+			    		<p>
+							<div id="slider"></div>
+						</p>
+						<p>
+							\begin{equation*}
+								P\left(\text{title 2}\right)
+							\end{equation*}
+						</p>
+					</div>
+				</div>
+
+				<div id="login" class="modal">
+					<div class="modal-content center-align">
+						<h1>Log In</h1>
+						<div id="login_text"></div>
+						<form>
+							{% csrf_token %}
+							<div class="row">
+								<div class="input-field col s12">
+									<input type="text" name="username" id="username_login">
+									<label for="username_login">Username</label>
+									<span class="helper-text username_login_helper"></span>
+								</div>
+								<div class="input-field col s12">
+									<input type="password" name="password" id="password_login">
+									<label for="password_login">Password</label>
+								</div>
+								<button name="submit" class="waves-effect waves-white btn submit login_submit">
+									Submit
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<div id="signup" class="modal">
+					<div class="modal-content center-align">
+						<h1>Sign Up</h1>
+						<form>
+							{% csrf_token %}
+							<div class="row">
+								<div class="input-field col s6">
+									<input type="text" name="first" id="first">
+									<label for="first">First Name</label>
+								</div>
+								<div class="input-field col s6">
+									<input type="text" name="last" id="last">
+									<label for="last">Last Name</label>
+								</div>
+								<div class="input-field col s12">
+									<input type="email" name="email" id="email">
+									<label for="email">Email*</label>
+									<span class="helper-text email_signup_helper"></span>
+								</div>
+								<div class="input-field col s12">
+									<input type="text" name="username" id="username_signup">
+									<label for="username_signup">Username*</label>
+									<span class="helper-text username_signup_helper"></span>
+								</div>
+								<div class="input-field col s12">
+									<input type="password" name="password" id="password_signup">
+									<label for="password_signup">Password*</label>
+									<span class="helper-text password_signup_helper"></span>
+								</div>
+								<button name="submit" class="waves-effect waves-white btn submit signup_submit">
+									Submit
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				{% block body %}
+				{% endblock %}
+			</div>
+		</div>
+	</body>
+</html>

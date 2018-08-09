@@ -1,0 +1,59 @@
+{% extends "foodblog/base.html" %}
+
+{% block title %}
+STEMeats {{ post.title }}
+{% endblock %}
+
+{% block body %}
+	<div id="post" hidden="true">{{ post.pk }}</div>
+	<div class="center-align title">
+		<h1>
+			{{ post.title }}{% if post.subtitle %}:{% endif %}
+		</h1>
+		<h4>{{ post.subtitle }}</h4>
+	</div>
+	<div class="row post_info">
+		<div class="col s10">{{ time }}</div>
+		<div class="col s2 right-align">{{ post.category }}</div>
+	</div>
+	<div class="indented">
+		{{ post.html|safe }}
+	</div>
+	<div class="divider"></div>
+	<div class="section">
+		<h4 class="center-align">Comments</h4>
+		<div class="divider"></div>
+		<table>
+			<tbody class="comments">
+				{% for comment in comments %}
+					<tr>
+						<td>
+							<div class="col s12">
+								<b>{{ comment.user }}</b>
+							</div>
+							<div class="col s12">
+								{{ comment.comment }}
+							</div>
+							<div class="col s12 center-align">
+								{{ comment.time }}
+							</div>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		{% if request.user.is_authenticated %}
+			<form id="new_comment" method="post">
+				{% csrf_token %}
+				<div class="input-field col s12">
+					<textarea id="comment" class="materialize-textarea"></textarea>
+					<label for="comment">Add Comment</label>
+					<button class="waves-effect waves-white btn submit">Submit</button>
+				</div>
+			</form>
+		{% endif %}
+	</div>
+
+	{% include 'foodblog/footer.html' %}
+{% endblock %}

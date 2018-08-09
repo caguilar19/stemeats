@@ -1,0 +1,99 @@
+{% extends "foodblog/base.html" %}
+
+{% block title %}
+STEMeats
+{% endblock %}
+
+{% block body %}
+	<div class="row hide-on-small-only">
+		<div class="col s12">
+			<ul class="tabs">
+				<li class="tab col s3">
+					<a class="active" href="#home">
+						<div>Home</div>
+					</a>
+				</li>
+				<li class="tab col s3">
+					<a href="#eats">
+						Eats
+					</a>
+				</li>
+				<li class="tab col s3">
+					<a href="#random">
+						Random
+					</a>
+				</li>
+				<li class="tab col s3">
+					<a href="#data">
+						Data
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="row hide-on-med-and-up small">
+		<div class="col s12">
+			<ul class="tabs">
+				<li class="tab col s12">
+					<a class="active" href="#home">
+						<div>Home</div>
+					</a>
+				</li>
+				<li class="tab col s12">
+					<a href="#eats">
+						Eats
+					</a>
+				</li>
+				<li class="tab col s12">
+					<a href="#random">
+						Random
+					</a>
+				</li>
+				<li class="tab col s12">
+					<a href="#data">
+						Data
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="home" class="active col s12">
+		<p class="indented">
+			Welcome to $\text{STEM}^{\text{eats}}$, a STEM-based food blog aiming to recommend delicious food in New York and showcase beautiful mathematical and scientific results.
+		</p>
+	</div>
+	<div id="eats" class="col s12">
+		<table>
+			<tbody>
+				{% for post in posts %}
+					<tr>
+						<td>
+							<a href="{% url 'restaurant_post' post.id %}">
+								{{ post.title }}
+							</a>
+						</td>
+						<td>{{ post.time }}</td>
+						<td>{{ post.category }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div id="random" class="col s12 center-align">
+		<div class="col s-4">
+			<div id="result_name"></div>
+			<div id="result_location"></div>
+		</div>
+		<a id="randomize" class="waves-effect waves-white btn" href="">
+			Randomize
+		</a>
+	</div>
+	<div id="data" class="col s12 center-align">
+		<h3>Number of Restaurants Per Cuisine</h3>
+		<svg class="chart"></svg>
+	</div>
+
+	{% include 'foodblog/footer.html' %}
+{% endblock %}
