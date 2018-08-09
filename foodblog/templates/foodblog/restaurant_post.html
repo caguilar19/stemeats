@@ -17,6 +17,7 @@ STEMeats {{ post.title }}
 		<div class="col s2 right-align">{{ post.category }}</div>
 	</div>
 	<div class="indented">
+		<!-- The HTML for the post is not escaped. -->
 		{{ post.html|safe }}
 	</div>
 	<div class="divider"></div>
@@ -44,6 +45,7 @@ STEMeats {{ post.title }}
 		</table>
 
 		{% if request.user.is_authenticated %}
+			<!-- Users can only comment if they are logged in. -->
 			<form id="new_comment" method="post">
 				{% csrf_token %}
 				<div class="input-field col s12">

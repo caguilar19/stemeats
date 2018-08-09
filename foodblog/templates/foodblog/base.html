@@ -6,6 +6,7 @@
 		<title>{% block title %}{% endblock %}</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 		<script id="comment_template" type="text/x-handlebars-template">
+			<!-- The template for a comment -->
 			{% verbatim %}
 				<tr>
 					<td>
@@ -19,6 +20,7 @@
 		<script src="https://d3js.org/d3.v5.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type="text/x-mathjax-config">
+			<!-- The configurations for MathJax -->
 			MathJax.Hub.Config({
 				tex2jax: {
 				    inlineMath: [['$','$'], ['\\(','\\)']],
@@ -42,6 +44,7 @@
 	</head>
 	<body>
 		<div class="preloader-wrapper big active load" hidden="false">
+			<!-- The loading spinner -->
 		    <div class="spinner-layer spinner-blue-only">
 		    	<div class="circle-clipper left">
 		    		<div class="circle"></div>
@@ -55,9 +58,11 @@
 	    	</div>
 		</div>
 	    <div class="content" hidden="true">
+	    	<!-- The content of the header -->
 	    	<div class="container">
 	    		<div class="row">
 			    	<div class="logo1 col s12">
+			    		<!-- The primary logo -->
 			    		<a href="{% url 'index' %}">
 			    			\begin{equation*}
 			    				\huge\text{STEM}^{\text{eats}}
@@ -66,6 +71,7 @@
 			    	</div>
 
 			    	<div class="logo2 col s12">
+			    		<!-- The secondary logo -->
 			    		<a href="{% url 'index' %}">
 				    		\begin{equation*}
 				    			\huge\sum\frac{1}{\nu}\left(mc^{2}\right)\frac{F}{a}^{\left(\sum\limits_{n = 0}^{\infty}\frac{1}{n!}\right)\,\ddot{x}\,\frac{v}{a}\,r\theta}
@@ -74,6 +80,8 @@
 			    	</div>
 
 			    	{% if request.user.is_authenticated %}
+			    		<!-- Shows the logout button 
+			    		if the user is logged in -->
 			    		<div class="col s4">
 			    			Logged in as: {{ request.user }}
 			    			<a class="waves-effect waves-white btn" href="{% url 'logout' %}">
@@ -81,6 +89,8 @@
 				    		</a>
 			    		</div>
 			    	{% else %}
+			    		<!-- Shows the login and signup buttons
+			    		if the user is not logged in -->
 				    	<div class="col s4">
 				    		<a class="waves-effect waves-white btn modal-trigger" href="#login">
 				    			Log In
@@ -96,6 +106,7 @@
 				    {% endif %}
 
 			    	<div class="col s4 offset-s4">
+			    		<!-- Shows the slider that allows users to change the probability of getting the secondary logo -->
 			    		<p>
 							<div id="slider"></div>
 						</p>
@@ -108,6 +119,7 @@
 				</div>
 
 				<div id="login" class="modal">
+					<!-- The login modal -->
 					<div class="modal-content center-align">
 						<h1>Log In</h1>
 						<div id="login_text"></div>
@@ -132,6 +144,7 @@
 				</div>
 
 				<div id="signup" class="modal">
+					<!-- The signup modal -->
 					<div class="modal-content center-align">
 						<h1>Sign Up</h1>
 						<form>

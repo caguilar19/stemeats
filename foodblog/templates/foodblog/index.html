@@ -6,6 +6,7 @@ STEMeats
 
 {% block body %}
 	<div class="row hide-on-small-only">
+		<!-- The tabs are horizontal on medium and large screens. -->
 		<div class="col s12">
 			<ul class="tabs">
 				<li class="tab col s3">
@@ -33,6 +34,7 @@ STEMeats
 	</div>
 
 	<div class="row hide-on-med-and-up small">
+		<!-- The tabs are vertical on small screens. -->
 		<div class="col s12">
 			<ul class="tabs">
 				<li class="tab col s12">
@@ -60,11 +62,13 @@ STEMeats
 	</div>
 
 	<div id="home" class="active col s12">
+		<!-- The main tab on the home page -->
 		<p class="indented">
 			Welcome to $\text{STEM}^{\text{eats}}$, a STEM-based food blog aiming to recommend delicious food in New York and showcase beautiful mathematical and scientific results.
 		</p>
 	</div>
 	<div id="eats" class="col s12">
+		<!-- The tab that displays posts -->
 		<table>
 			<tbody>
 				{% for post in posts %}
@@ -82,6 +86,7 @@ STEMeats
 		</table>
 	</div>
 	<div id="random" class="col s12 center-align">
+		<!-- The tab that includes the random restaurant chooser -->
 		<div class="col s-4">
 			<div id="result_name"></div>
 			<div id="result_location"></div>
@@ -91,6 +96,7 @@ STEMeats
 		</a>
 	</div>
 	<div id="data" class="col s12 center-align">
+		<!-- The tab that includes data on the restaurants -->
 		<h3>Number of Restaurants Per Cuisine</h3>
 		<svg class="chart"></svg>
 	</div>

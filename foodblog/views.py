@@ -11,60 +11,18 @@ from .models import *
 
 # Create your views here.
 def index(request):
+	""" Displays the Home Page """
 	posts = Post.objects.all()
 
 	return render(request, "foodblog/index.html", {"posts": posts})
 
 def logout_view(request):
+	""" Logs a User Out. """
 	logout(request)
 	return HttpResponseRedirect(reverse("index"))
 
-def signup_view(request):
-	first = request.POST['first']
-	last = request.POST['last']
-	email = request.POST['email']
-	username = request.POST['username']
-	password = request.POST['password']
-
-	error = ""
-
-	try:
-		User.objects.get(username=username)
-		taken = True
-	except ObjectDoesNotExist:
-		taken = False
-
-	if taken:
-		error += "Username taken."
-	if len(username) < 5:
-		if error != "":
-			error += " "
-		error += "Username must be at least five characters."
-	if len(password) < 8:
-		if error != "":
-			error += " "
-		error += "Password must be at least eight characters."
-	if "@" not in email or "." not in email:
-		if error != "":
-			error += " "
-		error += "Please enter a valid email address."
-
-	if error != "":
-		return render(
-			request, "foodblog/index.html", {"message": error})
-	else:
-		user = User.objects.create_user(username, email, password)
-
-		user.first_name = first
-		user.last_name = last
-
-		user.save()
-
-		login(request, user)
-
-		return HttpResponseRedirect(reverse("index"))
-
 def restaurant_post(request, post):
+	""" Displays a Restaurant Post """
 	post = Post.objects.get(pk=post)
 
 	t = post.time.astimezone(pytz.timezone("America/New_York"))
@@ -75,6 +33,7 @@ def restaurant_post(request, post):
 	return render(request, "foodblog/restaurant_post.html", context)
 
 def new_comment(request):
+	""" Creates a New Comment """
 	comment_text = request.GET.get('comment', None)
 	post_id = request.GET.get('post', None)
 	char = []
@@ -112,6 +71,7 @@ def new_comment(request):
 	return JsonResponse(data)
 
 def randomize(request):
+	""" Returns a Random Restaurant """
 	restaurants = Restaurant.objects.all()
 
 	n = len(restaurants)
@@ -125,6 +85,7 @@ def randomize(request):
 	return JsonResponse(data)
 
 def check_username_login(request):
+	""" Checks if a Username is Valid """
 	username = request.GET.get('username', None)
 
 	try:
@@ -138,6 +99,7 @@ def check_username_login(request):
 	return JsonResponse(data)
 
 def check_login(request):
+	""" Checks if a Login is Valid """
 	username = request.GET.get("username", None)
 	password = request.GET.get("password", None)
 	user = authenticate(request, username=username, password=password)
@@ -153,6 +115,7 @@ def check_login(request):
 		return JsonResponse(data)
 
 def check_signup(request):
+	""" Checks if a Signup is Valid """
 	first = request.GET.get('first', None)
 	last = request.GET.get('last', None)
 	username = request.GET.get('username', None)
@@ -200,6 +163,7 @@ def check_signup(request):
 	return JsonResponse(data)
 
 def get_data(request):
+	""" Gets Cuisine Data """
 	cuisines = []
 	for cuisine in Cuisine.objects.all():
 		cuisines.append(cuisine)

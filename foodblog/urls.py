@@ -5,7 +5,6 @@ from . import views
 urlpatterns = [
 	path("", views.index, name="index"),
 	path("logout", views.logout_view, name="logout"),
-	path("signup", views.signup_view, name="signup"),
 	path("<int:post>", views.restaurant_post, name="restaurant_post"),
 	path("new_comment", views.new_comment, name="new_comment"),
 	path("randomize", views.randomize, name="randomize"),

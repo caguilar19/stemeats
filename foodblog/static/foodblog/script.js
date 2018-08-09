@@ -2,9 +2,7 @@ const comment_template = Handlebars.compile(
 	document.getElementById('comment_template').innerHTML);
 
 $(document).ready( () => {
-
-	$('.pushpin').pushpin();
-
+  // Initializes the Materialize components
 	$('.modal').modal();
 
 	$('.tabs').tabs()
@@ -13,12 +11,16 @@ $(document).ready( () => {
 	
 	$('.sidenav').tabs()
 
+  // Gets the current secondary title probability from local storage and sets 
+  // it to 0.2 if none exists
 	if (!localStorage.getItem('p')) {
 		localStorage.setItem('p', 0.2);
 	}
 
 	var p = localStorage.getItem('p');
 
+  // Determines which title to show based on the probability 
+  // and a random number
 	if (p == 0) {
 		$('.logo1').show();
 		$('.logo2').hide();
@@ -41,6 +43,7 @@ $(document).ready( () => {
 	}
 
 	var slider = document.getElementById('slider');
+    // Creates the slider and sets its range
   	noUiSlider.create(slider, {
 	   	start: [p],
 	   	connect: [true, false],
@@ -54,10 +57,12 @@ $(document).ready( () => {
   	});
 
   	slider.noUiSlider.on('change', function () {
+      // Changes the secondary title probability when the slider is changed
   		localStorage.setItem('p', slider.noUiSlider.get());
   	});
 
   	$('#new_comment').submit(() => {
+      // Creates a new comment upon submission
   		var comment = $('#comment').val();
   		var id = $('#post').html();
 
@@ -81,6 +86,7 @@ $(document).ready( () => {
   	});
 
   	$('#randomize').click(event => {
+      // Retrieves a random restaurant
   		$.ajax({
   			url: "randomize",
   			data: {},
@@ -94,9 +100,11 @@ $(document).ready( () => {
   		return false;
   	});
 
+    // Disables the login submit button
   	$('.login_submit').prop('disabled', true);
 
   	$('#username_login').change(() => {
+      // Checks if the username is valid
   		username = $('#username_login').val();
 
   		$.ajax({
@@ -117,6 +125,7 @@ $(document).ready( () => {
   	});
 
   	$('.login_submit').click(event => {
+      // Logs a user in
   		username = $('#username_login').val();
 
   		password = $('#password_login').val();
@@ -150,6 +159,7 @@ $(document).ready( () => {
   	});
 
   	$('.signup_submit').click(event => {
+      // Signs a user up
   		first = $('#first').val();
 
   		last = $('#last').val();
@@ -211,6 +221,7 @@ $(document).ready( () => {
   		return false;
   	});
 
+  // Creates the restaurant data visualization
 	$.ajax({
 	  	url: "get_data",
   		success: function (data) {
