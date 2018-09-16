@@ -14,6 +14,5 @@ urlpatterns = [
 		name="check_username_login"),
 	path("check_login", views.check_login, name="check_login"),
 	path("check_signup", views.check_signup, name="check_signup"),
-	path("get_data", views.get_data, name="get_data"),
-	path('data', views.data, name="data")
+	path("get_data", views.get_data, name="get_data")
 ]
