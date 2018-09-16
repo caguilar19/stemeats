@@ -175,3 +175,6 @@ def get_data(request):
 	data = {"c": c}
 
 	return JsonResponse(data)
+
+def data(request):
+	return render(request, 'foodblog/data.html')
