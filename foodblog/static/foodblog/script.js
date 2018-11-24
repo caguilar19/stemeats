@@ -234,7 +234,7 @@ $(document).ready( () => {
 
   			var chart = d3.select(".chart")
   				.attr("preserveAspectRatio", "xMinYMin meet")
-  				.attr("viewBox", "0 0 250 250")
+  				.attr("viewBox", "0 0 350 350")
 
   			var bar = chart.selectAll("g")
   				.data(data.c)
@@ -243,11 +243,11 @@ $(document).ready( () => {
   				.attr("transform", function(d, i) { return "translate(0," + i * height + ")"; })
 
   			bar.append("rect")
-  				.attr("width", function(d) { return 100 * d.count + "px"; })
+  				.attr("width", function(d) { return 20 * d.count + "px"; })
   				.attr("height", height - 1)
 
   			bar.append("text")
-  				.attr("x", function(d) { return 100 * d.count - 3; })
+  				.attr("x", function(d) { return 20 * d.count - 3; })
   				.attr("y", height/2)
   				.attr("dy", ".35em")
   				.text(function (d) { return d.cuisine + " " + d.count; });
