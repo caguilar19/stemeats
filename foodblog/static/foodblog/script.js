@@ -222,36 +222,36 @@ $(document).ready( () => {
   	});
 
   // Creates the restaurant data visualization
-	$.ajax({
-	  	url: "get_data",
-  		success: function (data) {
-  			count = []
-  			for (var i = data.c.length - 1; i >= 0; i--) {
-  				count.push(data.c[i].count)
-  			}
+  // $.ajax({
+  //   	url: "get_data",
+  // 		success: function (data) {
+  // 			count = []
+  // 			for (var i = data.c.length - 1; i >= 0; i--) {
+  // 				count.push(data.c[i].count)
+  // 			}
 
-  			var height = 10;
+  // 			var height = 10;
 
-  			var chart = d3.select(".chart")
-  				.attr("preserveAspectRatio", "xMinYMin meet")
-  				.attr("viewBox", "0 0 350 350")
+  // 			var chart = d3.select(".chart")
+  // 				.attr("preserveAspectRatio", "xMinYMin meet")
+  // 				.attr("viewBox", "0 0 350 350")
 
-  			var bar = chart.selectAll("g")
-  				.data(data.c)
-  				.enter()
-  				.append("g")
-  				.attr("transform", function(d, i) { return "translate(0," + i * height + ")"; })
+  // 			var bar = chart.selectAll("g")
+  // 				.data(data.c)
+  // 				.enter()
+  // 				.append("g")
+  // 				.attr("transform", function(d, i) { return "translate(0," + i * height + ")"; })
 
-  			bar.append("rect")
-  				.attr("width", function(d) { return d.count + "px"; })
-  				.attr("height", height - 1)
+  // 			bar.append("rect")
+  // 				.attr("width", function(d) { return d.count + "px"; })
+  // 				.attr("height", height - 1)
 
-  			bar.append("text")
-  				.attr("x", function(d) { return d.count - 3; })
-  				.attr("y", height/2)
-  				.attr("dy", ".35em")
-  				.text(function (d) { return d.cuisine + " " + d.count; });
-  		}
-	});
+  // 			bar.append("text")
+  // 				.attr("x", function(d) { return d.count - 3; })
+  // 				.attr("y", height/2)
+  // 				.attr("dy", ".35em")
+  // 				.text(function (d) { return d.cuisine + " " + d.count; });
+  // 		}
+  // });
 
 })
