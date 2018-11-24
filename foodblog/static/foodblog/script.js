@@ -234,7 +234,7 @@ $(document).ready( () => {
 
   			var chart = d3.select(".chart")
   				.attr("preserveAspectRatio", "xMinYMin meet")
-  				.attr("viewBox", "0 0 350 350")
+  				.attr("viewBox", "0 0 250 250")
 
   			var bar = chart.selectAll("g")
   				.data(data.c)
