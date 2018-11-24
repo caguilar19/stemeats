@@ -122,7 +122,7 @@ h4 {
 }
 
 .chart rect {
-  fill: black;
+  fill: orange !important;
 }
 
 .chart rect:hover {
