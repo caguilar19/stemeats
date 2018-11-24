@@ -230,7 +230,7 @@ $(document).ready( () => {
   				count.push(data.c[i].count)
   			}
 
-  			var height = 10;
+  			var height = 2;
 
   			var chart = d3.select(".chart")
   				.attr("preserveAspectRatio", "xMinYMin meet")
