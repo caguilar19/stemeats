@@ -230,7 +230,7 @@ $(document).ready( () => {
   				count.push(data.c[i].count)
   			}
 
-  			var height = 20;
+  			var height = 10;
 
   			var chart = d3.select(".chart")
   				.attr("preserveAspectRatio", "xMinYMin meet")
@@ -243,11 +243,11 @@ $(document).ready( () => {
   				.attr("transform", function(d, i) { return "translate(0," + i * height + ")"; })
 
   			bar.append("rect")
-  				.attr("width", function(d) { return 50 * d.count + "px"; })
+  				.attr("width", function(d) { return 100 * d.count + "px"; })
   				.attr("height", height - 1)
 
   			bar.append("text")
-  				.attr("x", function(d) { return 50 * d.count - 3; })
+  				.attr("x", function(d) { return 100 * d.count - 3; })
   				.attr("y", height/2)
   				.attr("dy", ".35em")
   				.text(function (d) { return d.cuisine + " " + d.count; });
